@@ -2,14 +2,7 @@
 
 ## Image Segmentation
 
-### Image Segmentation with CoreML
-
-**Reference:** https://github.com/tucan9389/ImageSegmentation-CoreML
-
-####Notes
-* Renamed to `ImSeg-CoreML`
-* It uses a model called TBD
-* 
+TBD
 
 ## Face Detection on iOS
 **Reference**: Practical Artificial Intelligence with Swift by Mars Geldard et. al.
