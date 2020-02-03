@@ -9,11 +9,15 @@
 import SwiftUI
 import Vision
 
+
 struct ContentView: View {
     @State private var imagePickerOpen: Bool = false
     @State private var cameraOpen: Bool = false
     @State private var image: UIImage? = nil
     @State private var faces: [VNFaceObservation]? = nil
+
+    // The next three variables store the face count, image, availability of camera
+    // and whether detection (dependent on availability of button) is enabled.
     
     private var faceCount: Int {return faces?.count ?? 0 }
     private let placeholderImage = UIImage(named: "placeholder")!
@@ -36,6 +40,12 @@ struct ContentView: View {
         self.image?.detectFaces { result in
             self.faces = result
         }
+    }
+    
+    private func controlReturned(image: UIImage?) {
+        print("Image return \(image == nil ? "failure" : "success")...")
+        self.image = image?.fixOrientation()
+        self.faces = nil
     }
     
     private func summonImagePicker() {
@@ -63,10 +73,10 @@ extension ContentView {
         return AnyView(NavigationView {
             MainView(
                 image: image ?? placeholderImage,
-                text: "\(faceCount) face\(faceCount == 1 ? "" : "S")") {
+                text: "\(faceCount) face\(faceCount == 1 ? "" : "s")") {
                     TwoStateButton (
                         text: "Detect Faces",
-                        disabled: !decttionEnabled,
+                        disabled: !detectionEnabled,
                         action: getFaces
                     )
             }
